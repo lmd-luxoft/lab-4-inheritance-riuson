@@ -5,16 +5,16 @@ namespace Chess
 {
     public class ChessFigure
     {
-        private Type type;
+        private FigureType type;
         private string currentCoord;
 
-        public ChessFigure(Type type, string currentCoord)
+        public ChessFigure(FigureType type, string currentCoord)
         {
             this.type = type;
             this.currentCoord = currentCoord.ToUpper();
         }
 
-        public enum Type
+        public enum FigureType
         {
 			/// <summary>
 			/// Ладья.
@@ -46,7 +46,7 @@ namespace Chess
         {
             string nextCoordUpperCase = nextCoord.ToUpper();
 
-			if (type == Type.PAWN)
+			if (type == FigureType.PAWN)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
@@ -59,7 +59,7 @@ namespace Chess
 
 			}
 
-			else if (type == Type.ROOK)
+			else if (type == FigureType.ROOK)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
@@ -71,7 +71,7 @@ namespace Chess
 				}
 				else return false;
 			}
-			else if (type == Type.KNIGHT)
+			else if (type == FigureType.KNIGHT)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
@@ -86,7 +86,7 @@ namespace Chess
 				else return false;
 			}
 
-			else if (type == Type.BISHOP)
+			else if (type == FigureType.BISHOP)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
@@ -98,7 +98,7 @@ namespace Chess
 				else return false;
 			}
 
-			else if (type == Type.KING)
+			else if (type == FigureType.KING)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
@@ -109,7 +109,7 @@ namespace Chess
 				}
 				else return false;
 			}
-			else if (type == Type.QUEEN)
+			else if (type == FigureType.QUEEN)
 			{
 				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
 				{
