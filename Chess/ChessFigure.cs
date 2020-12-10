@@ -6,12 +6,19 @@ namespace Chess
     public class ChessFigure
     {
         private FigureType type;
-        private string currentCoord;
 
         public ChessFigure(FigureType type, string currentCoord)
         {
             this.type = type;
-            this.currentCoord = currentCoord.ToUpper();
+
+            if (Coordinates.TryParse(currentCoord, out var coordinates))
+            {
+                this.Coordinates = coordinates;
+            }
+            else
+            {
+                throw new FigureException("Нельзя разместить фигуру по неправильным координатам!");
+            }
         }
 
 		public Coordinates Coordinates { get; }
@@ -44,15 +51,18 @@ namespace Chess
             QUEEN
         }
 
-        public bool Move(string nextCoord)
+        public bool Move(string strNextCoord)
         {
-            string nextCoordUpperCase = nextCoord.ToUpper();
+            if (!Coordinates.TryParse(strNextCoord, out var nextCoord))
+            {
+                return false;
+            }
 
 			if (type == FigureType.PAWN)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
-					if (nextCoordUpperCase[0] != currentCoord[0] || nextCoordUpperCase[1] <= currentCoord[1] || (nextCoordUpperCase[1] - currentCoord[1] != 1 && (currentCoord[1] != '2' || nextCoordUpperCase[1] != '4')))
+					if (nextCoord.X != Coordinates.X || nextCoord.Y <= Coordinates.Y || (nextCoord.Y - Coordinates.Y != 1 && (Coordinates.Y != '2' || nextCoord.Y != '4')))
 						return false;
 					else
 						return true;
@@ -63,9 +73,9 @@ namespace Chess
 
 			else if (type == FigureType.ROOK)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
-					if ((nextCoordUpperCase[0] != currentCoord[0]) && (nextCoordUpperCase[1] != currentCoord[1]) || ((nextCoordUpperCase[0] == currentCoord[0]) && (nextCoordUpperCase[1] == currentCoord[1])))
+					if ((nextCoord.X != Coordinates.X) && (nextCoord.Y != Coordinates.Y) || ((nextCoord.X == Coordinates.X) && (nextCoord.Y == Coordinates.Y)))
 						return false;
 					else
 						return true;
@@ -75,12 +85,12 @@ namespace Chess
 			}
 			else if (type == FigureType.KNIGHT)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
 					int dx, dy;
-					dx = Math.Abs(nextCoordUpperCase[0] - currentCoord[0]);
-					dy = Math.Abs(nextCoordUpperCase[1] - currentCoord[1]);
-					if (!(Math.Abs(nextCoordUpperCase[0] - currentCoord[0]) == 1 && Math.Abs(nextCoordUpperCase[1] - currentCoord[1]) == 2 || Math.Abs(nextCoordUpperCase[0] - currentCoord[0]) == 2 && Math.Abs(nextCoordUpperCase[1] - currentCoord[1]) == 1))
+					dx = Math.Abs(nextCoord.X - Coordinates.X);
+					dy = Math.Abs(nextCoord.Y - Coordinates.Y);
+					if (!(Math.Abs(nextCoord.X - Coordinates.X) == 1 && Math.Abs(nextCoord.Y - Coordinates.Y) == 2 || Math.Abs(nextCoord.X - Coordinates.X) == 2 && Math.Abs(nextCoord.Y - Coordinates.Y) == 1))
 						return false;
 					else
 						return true;
@@ -90,9 +100,9 @@ namespace Chess
 
 			else if (type == FigureType.BISHOP)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
-					if (!(Math.Abs(nextCoordUpperCase[0] - currentCoord[0]) == Math.Abs(nextCoordUpperCase[1] - currentCoord[1])))
+					if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y)))
 						return false;
 					else
 						return true;
@@ -102,9 +112,9 @@ namespace Chess
 
 			else if (type == FigureType.KING)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
-					if (!(Math.Abs(nextCoordUpperCase[0] - currentCoord[0]) <= 1 && Math.Abs(nextCoordUpperCase[1] - currentCoord[1]) <= 1))
+					if (!(Math.Abs(nextCoord.X - Coordinates.X) <= 1 && Math.Abs(nextCoord.Y - Coordinates.Y) <= 1))
 						return false;
 					else
 						return true;
@@ -113,9 +123,9 @@ namespace Chess
 			}
 			else if (type == FigureType.QUEEN)
 			{
-				if (nextCoordUpperCase[0] >= 'A' && nextCoordUpperCase[0] <= 'H' && nextCoordUpperCase[1] >= '1' && nextCoordUpperCase[1] <= '8')
+				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
 				{
-					if (!(Math.Abs(nextCoordUpperCase[0] - currentCoord[0]) == Math.Abs(nextCoordUpperCase[1] - currentCoord[1]) || nextCoordUpperCase[0] == currentCoord[0] || nextCoordUpperCase[1] == currentCoord[1]))
+					if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y) || nextCoord.X == Coordinates.X || nextCoord.Y == Coordinates.Y))
 						return false;
 					else
 						return true;
