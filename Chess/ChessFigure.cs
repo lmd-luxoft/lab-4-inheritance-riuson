@@ -42,7 +42,7 @@ namespace Chess
             QUEEN
         }
 
-        internal bool Move(string nextCoord)
+        public bool Move(string nextCoord)
         {
             string nextCoordUpperCase = nextCoord.ToUpper();
 
