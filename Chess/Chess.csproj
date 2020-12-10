@@ -43,6 +43,7 @@
     <Compile Include="ChessFigure.cs" />
     <Compile Include="Coordinates.cs" />
     <Compile Include="CoordinatesException.cs" />
+    <Compile Include="FigureException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

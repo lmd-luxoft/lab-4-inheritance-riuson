@@ -120,5 +120,12 @@ namespace Chess.Tests
             var figure = new ChessFigure(ChessFigure.FigureType.QUEEN, "d1");
             Assert.AreEqual(true, figure.Move("h5"));
         }
+
+        [Test]
+        public void FigureCannotMoveToInvalidPosition()
+        {
+            var figure = new ChessFigure(ChessFigure.FigureType.KING, "E1");
+            Assert.AreEqual(false, figure.Move("E0"));
+        }
     }
 }

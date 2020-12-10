@@ -14,6 +14,8 @@ namespace Chess
             this.currentCoord = currentCoord.ToUpper();
         }
 
+		public Coordinates Coordinates { get; }
+
         public enum FigureType
         {
 			/// <summary>

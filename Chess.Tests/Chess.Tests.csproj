@@ -47,6 +47,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestChessFigure.cs" />
     <Compile Include="TestCoordinates.cs" />
     <Compile Include="TestMovements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
