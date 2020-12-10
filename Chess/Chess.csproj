@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessFigure.cs" />
+    <Compile Include="Coordinates.cs" />
+    <Compile Include="CoordinatesException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
