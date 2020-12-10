@@ -99,5 +99,13 @@ namespace Chess
             ChessFigure figure = new ChessFigure(ChessFigure.Type.QUEEN, "D1");
             Assert.AreEqual(false,figure.Move("E3"));
         }
+
+
+        [Test]
+        public void FigureCanUseLowerCasePosition()
+        {
+            ChessFigure figure = new ChessFigure(ChessFigure.Type.QUEEN, "d1");
+            Assert.AreEqual(true, figure.Move("h5"));
+        }
     }
 }
