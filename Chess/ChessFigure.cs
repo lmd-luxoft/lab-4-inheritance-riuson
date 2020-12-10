@@ -60,77 +60,51 @@ namespace Chess
 
 			if (type == FigureType.PAWN)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					if (nextCoord.X != Coordinates.X || nextCoord.Y <= Coordinates.Y || (nextCoord.Y - Coordinates.Y != 1 && (Coordinates.Y != '2' || nextCoord.Y != '4')))
-						return false;
-					else
-						return true;
-				}
-				else return false;
-
+				if (nextCoord.X != Coordinates.X || nextCoord.Y <= Coordinates.Y || (nextCoord.Y - Coordinates.Y != 1 && (Coordinates.Y != '2' || nextCoord.Y != '4')))
+					return false;
+				else
+					return true;
 			}
 
 			else if (type == FigureType.ROOK)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					if ((nextCoord.X != Coordinates.X) && (nextCoord.Y != Coordinates.Y) || ((nextCoord.X == Coordinates.X) && (nextCoord.Y == Coordinates.Y)))
-						return false;
-					else
-						return true;
-
-				}
-				else return false;
+				if ((nextCoord.X != Coordinates.X) && (nextCoord.Y != Coordinates.Y) || ((nextCoord.X == Coordinates.X) && (nextCoord.Y == Coordinates.Y)))
+					return false;
+				else
+					return true;
 			}
 			else if (type == FigureType.KNIGHT)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					int dx, dy;
-					dx = Math.Abs(nextCoord.X - Coordinates.X);
-					dy = Math.Abs(nextCoord.Y - Coordinates.Y);
-					if (!(Math.Abs(nextCoord.X - Coordinates.X) == 1 && Math.Abs(nextCoord.Y - Coordinates.Y) == 2 || Math.Abs(nextCoord.X - Coordinates.X) == 2 && Math.Abs(nextCoord.Y - Coordinates.Y) == 1))
-						return false;
-					else
-						return true;
-				}
-				else return false;
+				int dx, dy;
+				dx = Math.Abs(nextCoord.X - Coordinates.X);
+				dy = Math.Abs(nextCoord.Y - Coordinates.Y);
+				if (!(Math.Abs(nextCoord.X - Coordinates.X) == 1 && Math.Abs(nextCoord.Y - Coordinates.Y) == 2 || Math.Abs(nextCoord.X - Coordinates.X) == 2 && Math.Abs(nextCoord.Y - Coordinates.Y) == 1))
+					return false;
+				else
+					return true;
 			}
 
 			else if (type == FigureType.BISHOP)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y)))
-						return false;
-					else
-						return true;
-				}
-				else return false;
+				if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y)))
+					return false;
+				else
+					return true;
 			}
 
 			else if (type == FigureType.KING)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					if (!(Math.Abs(nextCoord.X - Coordinates.X) <= 1 && Math.Abs(nextCoord.Y - Coordinates.Y) <= 1))
-						return false;
-					else
-						return true;
-				}
-				else return false;
+				if (!(Math.Abs(nextCoord.X - Coordinates.X) <= 1 && Math.Abs(nextCoord.Y - Coordinates.Y) <= 1))
+					return false;
+				else
+					return true;
 			}
 			else if (type == FigureType.QUEEN)
 			{
-				if (nextCoord.X >= 'A' && nextCoord.X <= 'H' && nextCoord.Y >= '1' && nextCoord.Y <= '8')
-				{
-					if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y) || nextCoord.X == Coordinates.X || nextCoord.Y == Coordinates.Y))
-						return false;
-					else
-						return true;
-				}
-				else return false;
+				if (!(Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y) || nextCoord.X == Coordinates.X || nextCoord.Y == Coordinates.Y))
+					return false;
+				else
+					return true;
 			}
 			else
 				return false;
