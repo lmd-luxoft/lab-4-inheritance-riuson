@@ -7,18 +7,18 @@ namespace Chess
     {
         public delegate bool MovementRule(MovementData movementData);
 
-        private static readonly Dictionary<ChessFigure.FigureType, MovementRule> _checks =
-            new Dictionary<ChessFigure.FigureType, MovementRule>
+        private static readonly Dictionary<FigureType, MovementRule> _checks =
+            new Dictionary<FigureType, MovementRule>
             {
-                {ChessFigure.FigureType.PAWN, CheckPawn},
-                {ChessFigure.FigureType.ROOK, CheckRook},
-                {ChessFigure.FigureType.KNIGHT, CheckKnight},
-                {ChessFigure.FigureType.BISHOP, CheckBishop},
-                {ChessFigure.FigureType.KING, CheckKing},
-                {ChessFigure.FigureType.QUEEN, CheckQueen}
+                {FigureType.PAWN, CheckPawn},
+                {FigureType.ROOK, CheckRook},
+                {FigureType.KNIGHT, CheckKnight},
+                {FigureType.BISHOP, CheckBishop},
+                {FigureType.KING, CheckKing},
+                {FigureType.QUEEN, CheckQueen}
             };
 
-        public static MovementRule GetRule(ChessFigure.FigureType type)
+        public static MovementRule GetRule(FigureType type)
         {
             return _checks[type];
         }

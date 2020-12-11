@@ -11,7 +11,7 @@ namespace Chess.Tests
         public void CanCreateFigureWithValidCoordinates(string coord)
         {
             // Arrange & Act.
-            var figure = new ChessFigure(ChessFigure.FigureType.PAWN, coord);
+            var figure = new ChessFigure(FigureType.PAWN, coord);
 
             // Assert.
             Assert.That(figure.Coordinates.IsValid, Is.True);
@@ -24,7 +24,7 @@ namespace Chess.Tests
         public void CannotCreateFigureWithInvalidCoordinates(string coord)
         {
             // Arrange & Act && Assert.
-            Assert.Throws<FigureException>(() => new ChessFigure(ChessFigure.FigureType.PAWN, coord));
+            Assert.Throws<FigureException>(() => new ChessFigure(FigureType.PAWN, coord));
         }
     }
 }
