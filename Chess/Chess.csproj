@@ -44,6 +44,7 @@
     <Compile Include="Coordinates.cs" />
     <Compile Include="CoordinatesException.cs" />
     <Compile Include="FigureException.cs" />
+    <Compile Include="MovementData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
