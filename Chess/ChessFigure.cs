@@ -67,7 +67,7 @@ namespace Chess
 
 			if (type == FigureType.PAWN)
 			{
-				if (mvData.DeltaX != 0)
+				if (!mvData.IsVertical)
 					return false;
 				if (mvData.DeltaY <= 0)
 					return false;
@@ -82,8 +82,6 @@ namespace Chess
 			if (type == FigureType.ROOK)
 			{
 				if ((mvData.DeltaX != 0) && (mvData.DeltaY != 0))
-					return false;
-				if ((mvData.DeltaX == 0) && (mvData.DeltaY == 0))
 					return false;
 
                 return true;
@@ -114,11 +112,11 @@ namespace Chess
 			
             if (type == FigureType.QUEEN)
 			{
-				if (Math.Abs(mvData.DeltaX) == Math.Abs(mvData.DeltaY))
+				if (mvData.IsDiagonal)
 					return true;
-				if (mvData.DeltaX == 0)
+				if (mvData.IsVertical)
 					return true;
-				if (mvData.DeltaY == 0)
+				if (mvData.IsHorizontal)
 					return true;
 				
                 return false;
