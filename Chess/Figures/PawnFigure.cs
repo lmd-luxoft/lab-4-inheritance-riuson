@@ -2,7 +2,7 @@
 {
     public class PawnFigure : ChessFigure
     {
-        public PawnFigure(string currentCoord) : base(FigureType.PAWN, currentCoord)
+        public PawnFigure(string currentCoord) : base(currentCoord)
         {
         }
 

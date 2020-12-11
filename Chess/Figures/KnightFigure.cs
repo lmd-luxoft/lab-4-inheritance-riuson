@@ -4,7 +4,7 @@ namespace Chess.Figures
 {
     public class KnightFigure : ChessFigure
     {
-        public KnightFigure(string currentCoord) : base(FigureType.KNIGHT, currentCoord)
+        public KnightFigure(string currentCoord) : base(currentCoord)
         {
         }
 

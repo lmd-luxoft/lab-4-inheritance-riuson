@@ -2,7 +2,7 @@
 {
     public class BishopFigure : ChessFigure
     {
-        public BishopFigure(string currentCoord) : base(FigureType.BISHOP, currentCoord)
+        public BishopFigure(string currentCoord) : base(currentCoord)
         {
         }
 

@@ -2,7 +2,7 @@
 {
     public class QueenFigure : ChessFigure
     {
-        public QueenFigure(string currentCoord) : base(FigureType.QUEEN, currentCoord)
+        public QueenFigure(string currentCoord) : base(currentCoord)
         {
         }
 

@@ -2,12 +2,8 @@
 {
     public abstract class ChessFigure
     {
-        private readonly FigureType _type;
-
-        public ChessFigure(FigureType type, string currentCoord)
+        public ChessFigure(string currentCoord)
         {
-            _type = type;
-
             if (Coordinates.TryParse(currentCoord, out var coordinates))
                 Coordinates = coordinates;
             else

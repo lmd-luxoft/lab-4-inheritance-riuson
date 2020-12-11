@@ -2,7 +2,7 @@
 {
     public class RookFigure : ChessFigure
     {
-        public RookFigure(string currentCoord) : base(FigureType.ROOK, currentCoord)
+        public RookFigure(string currentCoord) : base(currentCoord)
         {
         }
 
