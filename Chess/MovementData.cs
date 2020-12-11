@@ -17,7 +17,7 @@ namespace Chess
         public int DeltaY => End.Y - Start.Y;
         public bool IsValid => Start.IsValid && End.IsValid && Start != End;
         public bool IsDiagonal => IsValid && Math.Abs(DeltaX) == Math.Abs(DeltaY);
-        public bool IsHorizontal { get; }
-        public bool IsVertical { get; }
+        public bool IsHorizontal => IsValid && DeltaY == 0;
+        public bool IsVertical => IsValid && DeltaX == 0;
     }
 }
