@@ -1,14 +1,12 @@
-﻿namespace Chess
+﻿namespace Chess.Figures
 {
-    public class ChessFigure
+    public abstract class ChessFigure
     {
-        private readonly MovementRules.MovementRule _rule;
         private readonly FigureType _type;
 
         public ChessFigure(FigureType type, string currentCoord)
         {
             _type = type;
-            _rule = MovementRules.GetRule(type);
 
             if (Coordinates.TryParse(currentCoord, out var coordinates))
                 Coordinates = coordinates;
@@ -26,7 +24,9 @@
 
             if (!mvData.IsValid) return false;
 
-            return _rule(mvData);
+            return CheckRules(mvData);
         }
+
+        protected abstract bool CheckRules(MovementData movementData);
     }
 }
