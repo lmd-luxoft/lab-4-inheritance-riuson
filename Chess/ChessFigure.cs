@@ -59,61 +59,78 @@ namespace Chess
 
             if (!mvData.IsValid) return false;
 
-            if (_type == FigureType.PAWN)
-            {
-                if (!mvData.IsVertical)
-                    return false;
-                if (mvData.DeltaY <= 0)
-                    return false;
-                if (mvData.Start.Y == '2' && mvData.End.Y == '4')
-                    return true;
-                if (mvData.DeltaY != 1)
-                    return false;
+            if (_type == FigureType.PAWN) return CheckPawn(mvData);
 
-                return true;
-            }
+            if (_type == FigureType.ROOK) return CheckRook(mvData);
 
-            if (_type == FigureType.ROOK)
-            {
-                if (mvData.DeltaX != 0 && mvData.DeltaY != 0)
-                    return false;
+            if (_type == FigureType.KNIGHT) return CheckKnight(mvData);
 
-                return true;
-            }
+            if (_type == FigureType.BISHOP) return CheckBishop(mvData);
 
-            if (_type == FigureType.KNIGHT)
-            {
-                if (Math.Abs(mvData.DeltaX) == 1 && Math.Abs(mvData.DeltaY) == 2)
-                    return true;
-                if (Math.Abs(mvData.DeltaX) == 2 && Math.Abs(mvData.DeltaY) == 1)
-                    return true;
+            if (_type == FigureType.KING) return CheckKing(mvData);
 
-                return false;
-            }
-
-            if (_type == FigureType.BISHOP) return mvData.IsDiagonal;
-
-            if (_type == FigureType.KING)
-            {
-                if (Math.Abs(mvData.DeltaX) <= 1 && Math.Abs(mvData.DeltaY) <= 1)
-                    return true;
-
-                return false;
-            }
-
-            if (_type == FigureType.QUEEN)
-            {
-                if (mvData.IsDiagonal)
-                    return true;
-                if (mvData.IsVertical)
-                    return true;
-                if (mvData.IsHorizontal)
-                    return true;
-
-                return false;
-            }
+            if (_type == FigureType.QUEEN) return CheckQueen(mvData);
 
             return false;
         }
+
+        private bool CheckPawn(MovementData movementData)
+        {
+            if (!movementData.IsVertical)
+                return false;
+            if (movementData.DeltaY <= 0)
+                return false;
+            if (movementData.Start.Y == '2' && movementData.End.Y == '4')
+                return true;
+            if (movementData.DeltaY != 1)
+                return false;
+
+            return true;
+        }
+
+        private bool CheckRook(MovementData movementData)
+        {
+            if (movementData.DeltaX != 0 && movementData.DeltaY != 0)
+                return false;
+
+            return true;
+        }
+
+        private bool CheckKnight(MovementData movementData)
+        {
+            if (Math.Abs(movementData.DeltaX) == 1 && Math.Abs(movementData.DeltaY) == 2)
+                return true;
+            if (Math.Abs(movementData.DeltaX) == 2 && Math.Abs(movementData.DeltaY) == 1)
+                return true;
+
+            return false;
+        }
+
+        private bool CheckBishop(MovementData movementData)
+        {
+            return movementData.IsDiagonal;
+        }
+
+        private bool CheckKing(MovementData movementData)
+        {
+            if (Math.Abs(movementData.DeltaX) <= 1 && Math.Abs(movementData.DeltaY) <= 1)
+                return true;
+
+            return false;
+        }
+
+        private bool CheckQueen(MovementData movementData)
+        {
+            if (movementData.IsDiagonal)
+                return true;
+            if (movementData.IsVertical)
+                return true;
+            if (movementData.IsHorizontal)
+                return true;
+
+            return false;
+        }
+
+        private delegate bool CheckMovement(MovementData movementData);
     }
 }
