@@ -80,5 +80,46 @@ namespace Chess.Tests
             // Assert.
             return movementData.IsDiagonal;
         }
+
+        [TestCase("A1", "B1", ExpectedResult = true)]
+        [TestCase("H7", "E7", ExpectedResult = true)]
+        [TestCase("A3", "B3", ExpectedResult = true)]
+        [TestCase("A1", "A1", ExpectedResult = false)]
+        [TestCase("B7", "B7", ExpectedResult = false)]
+        [TestCase("A1", "A2", ExpectedResult = false)]
+        [TestCase("E2", "E4", ExpectedResult = false)]
+        [TestCase("A1", "H8", ExpectedResult = false)]
+        public bool ShoudCheckHorizontal(string startStr, string endStr)
+        {
+            // Arrange.
+            Coordinates.TryParse(startStr, out var start);
+            Coordinates.TryParse(endStr, out var end);
+
+            // Act.
+            var movementData = new MovementData(start, end);
+
+            // Assert.
+            return movementData.IsHorizontal;
+        }
+
+        [TestCase("A1", "A2", ExpectedResult = true)]
+        [TestCase("H7", "H1", ExpectedResult = true)]
+        [TestCase("B3", "B6", ExpectedResult = true)]
+        [TestCase("A1", "A1", ExpectedResult = false)]
+        [TestCase("A1", "B1", ExpectedResult = false)]
+        [TestCase("H7", "G6", ExpectedResult = false)]
+        [TestCase("H8", "A1", ExpectedResult = false)]
+        public bool ShoudCheckVertical(string startStr, string endStr)
+        {
+            // Arrange.
+            Coordinates.TryParse(startStr, out var start);
+            Coordinates.TryParse(endStr, out var end);
+
+            // Act.
+            var movementData = new MovementData(start, end);
+
+            // Assert.
+            return movementData.IsVertical;
+        }
     }
 }
