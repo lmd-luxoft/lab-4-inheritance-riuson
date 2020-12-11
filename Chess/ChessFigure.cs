@@ -58,13 +58,22 @@ namespace Chess
                 return false;
             }
 
+            var mvData = new MovementData(this.Coordinates, nextCoord);
+
+            if (!mvData.IsValid)
+            {
+                return false;
+            }
+
 			if (type == FigureType.PAWN)
 			{
-				if (nextCoord.X != Coordinates.X)
+				if (mvData.DeltaX != 0)
 					return false;
-				if (nextCoord.Y <= Coordinates.Y)
+				if (mvData.DeltaY <= 0)
 					return false;
-				if (nextCoord.Y - Coordinates.Y != 1 && (Coordinates.Y != '2' || nextCoord.Y != '4'))
+                if (mvData.Start.Y == '2' && mvData.End.Y == '4')
+                    return true;
+				if (mvData.DeltaY != 1)
 					return false;
 
                 return true;
@@ -72,9 +81,9 @@ namespace Chess
 
 			if (type == FigureType.ROOK)
 			{
-				if ((nextCoord.X != Coordinates.X) && (nextCoord.Y != Coordinates.Y))
+				if ((mvData.DeltaX != 0) && (mvData.DeltaY != 0))
 					return false;
-				if ((nextCoord.X == Coordinates.X) && (nextCoord.Y == Coordinates.Y))
+				if ((mvData.DeltaX == 0) && (mvData.DeltaY == 0))
 					return false;
 
                 return true;
@@ -82,12 +91,9 @@ namespace Chess
 			
             if (type == FigureType.KNIGHT)
 			{
-				var dx = Math.Abs(nextCoord.X - Coordinates.X);
-				var dy = Math.Abs(nextCoord.Y - Coordinates.Y);
-
-                if (Math.Abs(nextCoord.X - Coordinates.X) == 1 && Math.Abs(nextCoord.Y - Coordinates.Y) == 2)
+                if (Math.Abs(mvData.DeltaX) == 1 && Math.Abs(mvData.DeltaY) == 2)
 					return true;
-				if (Math.Abs(nextCoord.X - Coordinates.X) == 2 && Math.Abs(nextCoord.Y - Coordinates.Y) == 1)
+				if (Math.Abs(mvData.DeltaX) == 2 && Math.Abs(mvData.DeltaY) == 1)
 					return true;
 
 				return false;
@@ -95,15 +101,12 @@ namespace Chess
 
 			if (type == FigureType.BISHOP)
 			{
-				if (Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y))
-					return true;
-				
-				return false;
+				return mvData.IsDiagonal;
 			}
 
 			if (type == FigureType.KING)
 			{
-				if (Math.Abs(nextCoord.X - Coordinates.X) <= 1 && Math.Abs(nextCoord.Y - Coordinates.Y) <= 1)
+				if (Math.Abs(mvData.DeltaX) <= 1 && Math.Abs(mvData.DeltaY) <= 1)
 					return true;
 			
                 return false;
@@ -111,11 +114,11 @@ namespace Chess
 			
             if (type == FigureType.QUEEN)
 			{
-				if (Math.Abs(nextCoord.X - Coordinates.X) == Math.Abs(nextCoord.Y - Coordinates.Y))
+				if (Math.Abs(mvData.DeltaX) == Math.Abs(mvData.DeltaY))
 					return true;
-				if (nextCoord.X == Coordinates.X)
+				if (mvData.DeltaX == 0)
 					return true;
-				if (nextCoord.Y == Coordinates.Y)
+				if (mvData.DeltaY == 0)
 					return true;
 				
                 return false;
