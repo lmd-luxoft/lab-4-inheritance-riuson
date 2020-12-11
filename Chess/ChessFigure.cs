@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Chess
 {
@@ -37,6 +38,17 @@ namespace Chess
             QUEEN
         }
 
+        private static readonly Dictionary<FigureType, CheckMovement> _checks =
+            new Dictionary<FigureType, CheckMovement>
+            {
+                {FigureType.PAWN, CheckPawn},
+                {FigureType.ROOK, CheckRook},
+                {FigureType.KNIGHT, CheckKnight},
+                {FigureType.BISHOP, CheckBishop},
+                {FigureType.KING, CheckKing},
+                {FigureType.QUEEN, CheckQueen}
+            };
+
         private readonly FigureType _type;
 
         public ChessFigure(FigureType type, string currentCoord)
@@ -59,22 +71,12 @@ namespace Chess
 
             if (!mvData.IsValid) return false;
 
-            if (_type == FigureType.PAWN) return CheckPawn(mvData);
+            var checkMovement = _checks[_type];
 
-            if (_type == FigureType.ROOK) return CheckRook(mvData);
-
-            if (_type == FigureType.KNIGHT) return CheckKnight(mvData);
-
-            if (_type == FigureType.BISHOP) return CheckBishop(mvData);
-
-            if (_type == FigureType.KING) return CheckKing(mvData);
-
-            if (_type == FigureType.QUEEN) return CheckQueen(mvData);
-
-            return false;
+            return checkMovement(mvData);
         }
 
-        private bool CheckPawn(MovementData movementData)
+        private static bool CheckPawn(MovementData movementData)
         {
             if (!movementData.IsVertical)
                 return false;
@@ -88,7 +90,7 @@ namespace Chess
             return true;
         }
 
-        private bool CheckRook(MovementData movementData)
+        private static bool CheckRook(MovementData movementData)
         {
             if (movementData.DeltaX != 0 && movementData.DeltaY != 0)
                 return false;
@@ -96,7 +98,7 @@ namespace Chess
             return true;
         }
 
-        private bool CheckKnight(MovementData movementData)
+        private static bool CheckKnight(MovementData movementData)
         {
             if (Math.Abs(movementData.DeltaX) == 1 && Math.Abs(movementData.DeltaY) == 2)
                 return true;
@@ -106,12 +108,12 @@ namespace Chess
             return false;
         }
 
-        private bool CheckBishop(MovementData movementData)
+        private static bool CheckBishop(MovementData movementData)
         {
             return movementData.IsDiagonal;
         }
 
-        private bool CheckKing(MovementData movementData)
+        private static bool CheckKing(MovementData movementData)
         {
             if (Math.Abs(movementData.DeltaX) <= 1 && Math.Abs(movementData.DeltaY) <= 1)
                 return true;
@@ -119,7 +121,7 @@ namespace Chess
             return false;
         }
 
-        private bool CheckQueen(MovementData movementData)
+        private static bool CheckQueen(MovementData movementData)
         {
             if (movementData.IsDiagonal)
                 return true;
